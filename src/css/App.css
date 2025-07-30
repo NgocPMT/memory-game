@@ -1,0 +1,11 @@
+body {
+  background-color: #101828;
+}
+
+.card-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 300px);
+  grid-template-rows: repeat(3, 300px);
+  gap: 1rem;
+}

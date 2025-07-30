@@ -15,24 +15,38 @@ export default function App() {
     setCards(shuffleArray(cards));
   }
 
+  function fetchCards() {
+    if (cards.length > 0) {
+      setCards([]);
+    }
+
+    fetch(
+      `https://api.thecatapi.com/v1/images/search?limit=12&api_key=${
+        import.meta.env.VITE_API_KEY
+      }`
+    )
+      .then((response) => response.json())
+      .then((fetchedCards) => {
+        setCards(
+          fetchedCards.map((card) => {
+            return { id: card.id, url: card.url };
+          })
+        );
+      });
+  }
+
   useEffect(() => {
-    if (!didInit || isGameOver) {
-      fetch(
-        `https://api.thecatapi.com/v1/images/search?limit=12&api_key=${
-          import.meta.env.VITE_API_KEY
-        }`
-      )
-        .then((response) => response.json())
-        .then((fetchedCards) => {
-          setCards(
-            fetchedCards.map((card) => {
-              return { id: card.id, url: card.url };
-            })
-          );
-        });
+    if (!didInit) {
+      fetchCards();
       didInit = true;
     }
-  }, [isGameOver]);
+  });
+
+  if (isGameOver) {
+    setScore(0);
+    setIsGameOver(false);
+    fetchCards();
+  }
 
   return (
     <div className="wrapper">
@@ -50,7 +64,7 @@ export default function App() {
         </div>
       </header>
       <div className="card-container">
-        {cards &&
+        {cards.length > 0 ? (
           cards.map((card) => (
             <Card
               key={card.id}
@@ -58,7 +72,10 @@ export default function App() {
               handleIncreaseScore={handleIncreaseScore}
               setIsGameOver={setIsGameOver}
             />
-          ))}
+          ))
+        ) : (
+          <p className="loading-message">Loading cards...</p>
+        )}
       </div>
     </div>
   );

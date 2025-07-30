@@ -3,6 +3,15 @@
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: #1e2939;
+  border: solid 1px #384c6b;
+  box-shadow: 0 0 4px rgba(88, 101, 137, 0.6);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.card:hover {
+  box-shadow: 0 0 4px rgba(88, 101, 137, 0.6), 0 0 32px rgba(88, 101, 137, 0.4);
+  transform: scale(1.01);
 }
 
 .card img {

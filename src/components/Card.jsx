@@ -2,8 +2,8 @@ import "../css/Card.css";
 
 export default function Card({ imageUrl }) {
   return (
-    <div className="card">
+    <button className="card">
       <img src={imageUrl} />
-    </div>
+    </button>
   );
 }

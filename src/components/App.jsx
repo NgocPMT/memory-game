@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import "../css/App.css";
 import Card from "./Card";
+import shuffleArray from "../shuffleArray";
 
 let didInit = false;
 
 export default function App() {
   const [cards, setCards] = useState([]);
+  const [score, setScore] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
+
+  function handleIncreaseScore() {
+    setScore(score + 1);
+    setCards(shuffleArray(cards));
+  }
 
   useEffect(() => {
-    if (!didInit) {
+    if (!didInit || isGameOver) {
       fetch(
         `https://api.thecatapi.com/v1/images/search?limit=12&api_key=${
           import.meta.env.VITE_API_KEY
@@ -22,8 +30,9 @@ export default function App() {
             })
           );
         });
+      didInit = true;
     }
-  }, []);
+  }, [isGameOver]);
 
   return (
     <div className="wrapper">
@@ -31,7 +40,7 @@ export default function App() {
         <h1>Memory Game (Cat Edition!)</h1>
         <div>
           <div className="score-board">
-            <h3>Score: </h3>
+            <h3>Score: {score}</h3>
             <h3>Best Score: </h3>
           </div>
           <p className="instruction">
@@ -42,7 +51,14 @@ export default function App() {
       </header>
       <div className="card-container">
         {cards &&
-          cards.map((card) => <Card key={card.id} imageUrl={card.url} />)}
+          cards.map((card) => (
+            <Card
+              key={card.id}
+              imageUrl={card.url}
+              handleIncreaseScore={handleIncreaseScore}
+              setIsGameOver={setIsGameOver}
+            />
+          ))}
       </div>
     </div>
   );

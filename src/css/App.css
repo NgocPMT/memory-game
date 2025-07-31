@@ -1,3 +1,7 @@
+:root {
+  --card-size: 250px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -48,8 +52,8 @@ header > div {
 }
 
 .card-container > * {
-  flex: 0 1 250px;
-  height: 250px;
+  flex: 0 1 var(--card-size);
+  height: var(--card-size);
 }
 
 .win-message {
@@ -76,4 +80,24 @@ header > div {
 .win-message button:hover {
   box-shadow: 0 0 2px rgba(88, 101, 137, 0.6), 0 0 16px rgba(88, 101, 137, 0.4);
   transform: scale(1.01);
+}
+
+@media (max-width: 900px) {
+  html {
+    font-size: 14px;
+  }
+
+  header > div {
+    flex-direction: column;
+  }
+
+  :root {
+    --card-size: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --card-size: 150px;
+  }
 }

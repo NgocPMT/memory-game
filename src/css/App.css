@@ -1,4 +1,4 @@
-html {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -9,13 +9,15 @@ body {
   background-color: #101828;
   color: #d1d5d1;
 }
-
 h1,
 h2,
 h3 {
   color: white;
-  text-align: center;
   margin-bottom: 1.5rem;
+}
+
+h1 {
+  text-align: center;
 }
 
 .wrapper {
@@ -23,12 +25,14 @@ h3 {
 }
 
 header {
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 header > div {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
 }
 
 .card-container {
@@ -42,4 +46,9 @@ header > div {
 .card-container > * {
   flex: 0 1 250px;
   height: 250px;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1.5rem;
 }

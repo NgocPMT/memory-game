@@ -8,6 +8,7 @@ let didInit = false;
 export default function App() {
   const [cards, setCards] = useState([]);
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
 
   function handleIncreaseScore() {
@@ -43,6 +44,9 @@ export default function App() {
   });
 
   if (isGameOver) {
+    if (score > bestScore) {
+      setBestScore(score);
+    }
     setScore(0);
     setIsGameOver(false);
     fetchCards();
@@ -55,7 +59,7 @@ export default function App() {
         <div>
           <div className="score-board">
             <h3>Score: {score}</h3>
-            <h3>Best Score: </h3>
+            <h3>Best Score: {bestScore}</h3>
           </div>
           <p className="instruction">
             Get points by clicking on an image but don't click on any more than

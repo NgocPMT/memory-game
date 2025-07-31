@@ -11,6 +11,8 @@ export default function App() {
   const [bestScore, setBestScore] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
 
+  const isWin = score > 0 && score === cards.length;
+
   function handleIncreaseScore() {
     setScore(score + 1);
     setCards(shuffleArray(cards));
@@ -67,20 +69,27 @@ export default function App() {
           </p>
         </div>
       </header>
-      <div className="card-container">
-        {cards.length > 0 ? (
-          cards.map((card) => (
-            <Card
-              key={card.id}
-              imageUrl={card.url}
-              handleIncreaseScore={handleIncreaseScore}
-              setIsGameOver={setIsGameOver}
-            />
-          ))
-        ) : (
-          <p className="loading-message">Loading cards...</p>
-        )}
-      </div>
+      {!isWin ? (
+        <div className="card-container">
+          {cards.length > 0 ? (
+            cards.map((card) => (
+              <Card
+                key={card.id}
+                imageUrl={card.url}
+                handleIncreaseScore={handleIncreaseScore}
+                setIsGameOver={setIsGameOver}
+              />
+            ))
+          ) : (
+            <p className="loading-message">Loading cards...</p>
+          )}
+        </div>
+      ) : (
+        <div className="win-message">
+          <h2 className="win-message">Congrats, You Win!</h2>
+          <button onClick={() => setIsGameOver(true)}>Play Again</button>
+        </div>
+      )}
     </div>
   );
 }

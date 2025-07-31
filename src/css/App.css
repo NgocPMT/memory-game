@@ -35,6 +35,10 @@ header > div {
   padding: 0 3rem;
 }
 
+.score-board > * {
+  color: yellow;
+}
+
 .card-container {
   width: 100%;
   display: flex;
@@ -48,7 +52,28 @@ header > div {
   height: 250px;
 }
 
-.loading-message {
+.win-message {
+  text-align: center;
+}
+
+.loading-message,
+.win-message h2 {
+  margin-top: 3rem;
   text-align: center;
   font-size: 1.5rem;
+}
+
+.win-message button {
+  background-color: #1e2939;
+  border: solid 1px #384c6b;
+  box-shadow: 0 0 2px rgba(88, 101, 137, 0.6);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.win-message button:hover {
+  box-shadow: 0 0 2px rgba(88, 101, 137, 0.6), 0 0 16px rgba(88, 101, 137, 0.4);
+  transform: scale(1.01);
 }
